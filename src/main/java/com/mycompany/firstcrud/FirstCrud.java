@@ -11,6 +11,6 @@ package com.mycompany.firstcrud;
 public class FirstCrud {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Our first Crud");
     }
 }
