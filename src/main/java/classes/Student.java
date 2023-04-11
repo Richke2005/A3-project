@@ -9,5 +9,26 @@ package classes;
  * @author richard
  */
 public class Student {
+    private int ra;
+    private String name;
+    private String adress;
+    private long phoneNumber;
+    private String email;
+    private String course;
+    
+    //Getters and Setters -------------------------------------------
+    public int getRa(){
+        return ra;
+    }
+    
+    public void setRa(int ra){
+        this.ra = ra;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    
     
 }

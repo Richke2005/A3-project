@@ -13,7 +13,7 @@ public class User {
     private String name;
     private String password;
     private String email;
-    private int phoneNumber;
+    private long phoneNumber;
     
 //Getters and Setters ----------------------------------------
     public int getUser(){
@@ -48,11 +48,11 @@ public class User {
         this.email = email;
     }
     
-    public int getNumber(){
+    public long getNumber(){
         return phoneNumber;
     }
     
-    public void setNumber(int num){
+    public void setNumber(long num){
         this.phoneNumber = num;
     }
     

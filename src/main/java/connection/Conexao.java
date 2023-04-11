@@ -6,7 +6,6 @@ package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -16,30 +15,28 @@ import java.sql.SQLException;
  * @author richard
  */
 public class Conexao {
+    
+   private static final String url = "jdbc:mysql://localhost:3306/faculdade";
+   private static final String user = "root";
+   private static final String password = "root";
    
-    public static void main(String[] args) throws SQLException{
-        Connection conexao = null;
+   private static Connection conn;
+   
+    public static Connection getConexao() {
+        
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/faculdade", "root", "root");
-            ResultSet rsClient = conexao.createStatement().executeQuery("SELECT * FROM Student;");
-            while(rsClient.next()){
-                System.out.println("Nome: " + rsClient.getString("nome"));
-                System.out.println("Email: " + rsClient.getString("email"));
-                System.out.println("celular : " +  rsClient.getString("celular"));
-                
-            }
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Driver do banco de dados não localizado");
-        } catch (SQLException ex) {
-            System.out.println("Ocorreu um erro ao acessar o banco");
-        }finally{
-            if(conexao!=null){
-                conexao.close();
+            if(conn == null){
+               conn = DriverManager.getConnection(url, user, password);
+               return conn;
+            }else{
+               return conn;
             }
         }
-    
-   }
-
-    
+        catch (SQLException ex) {
+           System.out.println("Driver do banco de dados não localizado");
+           System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+   
 }
