@@ -29,6 +29,37 @@ public class Student {
         return name;
     }
     
+    public String getAdress(){
+        return adress;
+    }
     
+    public void setAdress(String adress){
+        this.adress = adress;
+    }
     
+    public long getPhone(){
+        return phoneNumber;
+    }
+    
+    public void setPhone(long phone){
+        this.phoneNumber = phone;
+    }
+    
+    public String getEmail(){
+        return email;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
+    }
+    
+   public String getCourse(){
+       return course;
+   }
+   
+   public void setCourse(String course){
+       this.course = course;
+   }
+   
+   //===========================================
 }
