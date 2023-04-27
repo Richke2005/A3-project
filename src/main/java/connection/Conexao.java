@@ -27,6 +27,7 @@ public class Conexao {
         try {
             if(conn == null){
                conn = DriverManager.getConnection(url, user, password);
+               System.out.println("conexao ok");
                return conn;
             }else{
                return conn;
@@ -38,5 +39,5 @@ public class Conexao {
             return null;
         }
     }
-   
+    
 }

@@ -11,10 +11,24 @@ package classes;
 public class Student {
     private int ra;
     private String name;
-    private String adress;
-    private long phoneNumber;
+    private String adress; 
+    private String phoneNumber;
     private String email;
     private String course;
+    
+     
+    
+    //Constructor -------------------------------------------------------------------------
+     
+    /* public Student(int ra, String name, String adress, String phoneNumber, String email, String course) {
+        this.ra = ra;
+        this.name = name;
+        this.adress = adress;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.course = course;
+    }
+*/
     
     //Getters and Setters -------------------------------------------
     public int getRa(){
@@ -41,11 +55,11 @@ public class Student {
         this.adress = adress;
     }
     
-    public long getPhone(){
+    public String getPhone(){
         return phoneNumber;
     }
     
-    public void setPhone(long phone){
+    public void setPhone(String phone){
         this.phoneNumber = phone;
     }
     
@@ -65,5 +79,12 @@ public class Student {
        this.course = course;
    }
    
+   public void describeStudent() {
+         System.out.println(getName());
+         System.out.println(getAdress());
+         System.out.println(getPhone());
+         System.out.println(getEmail());
+         System.out.println(getCourse());
+    }
    //===========================================
 }
