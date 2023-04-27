@@ -1,18 +1,30 @@
 CREATE DATABASE faculdade;
 
 USE faculdade;
+
 SHOW TABLES;
+DESCRIBE Student;
+DESCRIBE Adm;
 
 CREATE TABLE Student(
 ra INT AUTO_INCREMENT,
 nome VARCHAR(30) NOT NULL,
 endereco VARCHAR(60),
-celular  BIGINT(14) NOT NULL,
+celular CHAR(14),
 email VARCHAR(50),
 curso VARCHAR(60),
 PRIMARY KEY(ra)
 );
-INSERT INTO Student(nome, email, celular) VALUES( "kend","kendylailane@hotmail.com", 11995263657);
-UPDATE Student set celular = 11947316281 where ra = 1;
-drop table Student;
-select * from Student;
+
+SELECT * FROM Student;
+
+CREATE TABLE Adm(
+cpf CHAR(12) NOT NULL, 
+nome VARCHAR(50) NOT NULL, 
+email VARCHAR(60) NOT NULL, 
+pass_word VARCHAR(70) NOT NULL, 
+celular CHAR(14),
+PRIMARY KEY(cpf)
+);
+
+SELECT * FROM Adm;
