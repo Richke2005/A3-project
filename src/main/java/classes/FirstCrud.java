@@ -3,8 +3,6 @@
  */
 
 package classes;
-
-
 /**
  *
  * @author richa
@@ -12,16 +10,15 @@ package classes;
 public class FirstCrud {
 
     public static void main(String[] args){
-       Student p1 = new Student();
+        
+       StudentDAO p1 = new StudentDAO("Quend", "rua jardim arco-iris", "(11)94431-6281", "richardke18@gmail.com.br", "Ciencia da computação");
        
-       p1.setName("Quend");
-       p1.setAdress("rua jardim arco-iris");
-       p1.setPhone("(11)94431-6281");
-       p1.setEmail("richardke18@gmail.com.br");
-       p1.setCourse( "Ciencia da computação");
+        for(StudentDAO element : p1.readStudent()){
+            element.describeStudent();
+            System.out.println("---------------------------");
+        }
        
-       p1.describeStudent();
-       new StudentDAO().updateStudent(p1);
+        
        
     }
 }

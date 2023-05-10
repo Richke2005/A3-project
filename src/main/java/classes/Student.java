@@ -20,15 +20,15 @@ public class Student {
     
     //Constructor -------------------------------------------------------------------------
      
-    /* public Student(int ra, String name, String adress, String phoneNumber, String email, String course) {
-        this.ra = ra;
+        public Student( String name, String adress, String phoneNumber, String email, String course) {
+    
         this.name = name;
         this.adress = adress;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.course = course;
     }
-*/
+
     
     //Getters and Setters -------------------------------------------
     public int getRa(){
