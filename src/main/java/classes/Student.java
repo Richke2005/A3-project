@@ -20,7 +20,7 @@ public class Student {
     
     //Constructor -------------------------------------------------------------------------
      
-        public Student( String name, String adress, String phoneNumber, String email, String course) {
+        public void addAll( String name, String adress, String phoneNumber, String email, String course) {
     
         this.name = name;
         this.adress = adress;
@@ -79,6 +79,8 @@ public class Student {
        this.course = course;
    }
    
+   
+   //Describe Student
    public void describeStudent() {
          System.out.println(getName());
          System.out.println(getAdress());

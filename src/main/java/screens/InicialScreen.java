@@ -4,7 +4,13 @@
  */
 package screens;
 
+import classes.Student;
 import classes.StudentDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 
@@ -44,12 +50,17 @@ public class InicialScreen extends javax.swing.JFrame {
         txtUser.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Nome");
+        jLabel1.setText("CPF");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("User");
+        jLabel2.setText("Password");
 
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
 
         btnEnter.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnEnter.setText("Entrar");
@@ -76,7 +87,7 @@ public class InicialScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(182, 182, 182)
                                 .addComponent(jLabel2)))
-                        .addGap(0, 173, Short.MAX_VALUE))
+                        .addGap(0, 136, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -113,20 +124,50 @@ public class InicialScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         String user = txtUser.getText();
         String password = txtPassword.getText();
-        
+        System.out.println(password);
         if(user.isEmpty() && password.isEmpty()){
           txtUser.setText("!!! Digite um valor para entrar !!!");     
         }else{
-            StudentDAO aluno = new StudentDAO();
+            try{
+                //adding class Student
+            Student aluno = new Student();
             aluno.setName(user);
             aluno.setEmail(password);
+           
+            //making the authentication 
+            ResultSet rset = StudentDAO.autheticateUser(aluno);
+
+            if(rset.next()){
+                //adding the user in a pre session
+               List<Student> session = new ArrayList<Student>();
+               aluno.addAll(rset.getString("nome"),
+                       rset.getString("endereco"),
+                       rset.getString("celular"),
+                       rset.getString("email"),
+                       rset.getString("curso"));
+            session.add(aluno);
+                
+            //tests
+            aluno.describeStudent();
+            System.out.println(session);
+            //disposng and giving another screen
             
-            aluno.addStudent(aluno);
-            /*TelaMenu menu = new TelaMenu();
+            TelaMenu menu = new TelaMenu();
             dispose();
-            menu.setVisible(true);*/
+            menu.setVisible(true);
+            }else{
+                System.out.println("erro na autenticação");
+            }
+           
+            }catch(SQLException ex){
+            ex.getStackTrace();
+            }
         }  
     }//GEN-LAST:event_btnEnterActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
