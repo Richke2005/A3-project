@@ -13,14 +13,14 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private long phoneNumber;
+    private String phoneNumber;
     
 //Getters and Setters ----------------------------------------
     public String getCpf(){
         return cpf;
     }
     
-    public void setUser(String cpf){
+    public void setCpf(String cpf){
         this.cpf = cpf;
     }
     
@@ -48,11 +48,11 @@ public class User {
         this.password = password;
     }
     
-    public long getNumber(){
+    public String getNumber(){
         return phoneNumber;
     }
     
-    public void setNumber(long num){
+    public void setNumber(String num){
         this.phoneNumber = num;
     }
     

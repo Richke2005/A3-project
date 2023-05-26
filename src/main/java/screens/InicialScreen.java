@@ -4,12 +4,15 @@
  */
 package screens;
 
-import classes.Student;
-import classes.StudentDAO;
+
+
+import classes.User;
+import classes.UserDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import static javax.swing.JOptionPane.*;
 
 
 
@@ -42,10 +45,9 @@ public class InicialScreen extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnEnter = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LogIn");
+        setTitle("Login");
         setName("LogIn"); // NOI18N
 
         txtUser.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -74,8 +76,6 @@ public class InicialScreen extends javax.swing.JFrame {
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnNew.setText("New user");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Icon são judas.jpg"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,9 +83,8 @@ public class InicialScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 49, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
@@ -103,9 +102,7 @@ public class InicialScreen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
+                .addGap(287, 287, 287)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -128,43 +125,23 @@ public class InicialScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         String user = txtUser.getText();
         String password = txtPassword.getText();
-        System.out.println(password);
         if(user.isEmpty() && password.isEmpty()){
-          txtUser.setText("!!! Digite um valor para entrar !!!");     
+          showMessageDialog(null, " Digite um valor! " );
         }else{
-            try{
-                //adding class Student
-            Student aluno = new Student();
-            aluno.setName(user);
-            aluno.setEmail(password);
+            //adding class Student
+            UserDAO person = new UserDAO();
+            person.setCpf(user);
+            person.setPassword(password);
            
             //making the authentication 
-            ResultSet rset = StudentDAO.autheticateUser(aluno);
-
-            if(rset.next()){
-                //adding the user in a pre session
-               List<Student> session = new ArrayList<Student>();
-               aluno.addAll(rset.getString("nome"),
-                       rset.getString("endereco"),
-                       rset.getString("celular"),
-                       rset.getString("email"),
-                       rset.getString("curso"));
-            session.add(aluno);
-                
-            //tests
-            aluno.describeStudent();
-            System.out.println(session);
-            //disposng and giving another screen
-            
-            TelaMenu menu = new TelaMenu();
+            if(person.loginUser(person) == true){
             dispose();
+            TelaMenu menu = new TelaMenu();
             menu.setVisible(true);
+            menu.setExtendedState(TelaMenu.MAXIMIZED_BOTH);
             }else{
-                System.out.println("erro na autenticação");
-            }
-           
-            }catch(SQLException ex){
-            ex.getStackTrace();
+                txtUser.setText("");
+                txtPassword.setText("");
             }
         }  
     }//GEN-LAST:event_btnEnterActionPerformed
@@ -213,7 +190,6 @@ public class InicialScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnNew;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

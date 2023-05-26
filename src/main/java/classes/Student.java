@@ -14,13 +14,13 @@ public class Student {
     private String adress; 
     private String phoneNumber;
     private String email;
-    private String course;
+    private int course;
     
      
     
     //Constructor -------------------------------------------------------------------------
      
-        public void addAll( String name, String adress, String phoneNumber, String email, String course) {
+        public void addAll( String name, String adress, String phoneNumber, String email, int course) {
     
         this.name = name;
         this.adress = adress;
@@ -71,11 +71,11 @@ public class Student {
         this.email = email;
     }
     
-   public String getCourse(){
+   public int getCourse(){
        return course;
    }
    
-   public void setCourse(String course){
+   public void setCourse(int course){
        this.course = course;
    }
    

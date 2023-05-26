@@ -24,7 +24,7 @@ public class StudentDAO extends Student{
     
     
     public void addStudent(Student person){
-        String sql = "INSERT INTO Student (nome, endereco, celular, email, curso) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO student (nome, endereco, celular, email, curse_key) VALUES(?,?,?,?,?)";
         
         PreparedStatement ps = null;
         
@@ -34,7 +34,7 @@ public class StudentDAO extends Student{
             ps.setString(2, person.getAdress());
             ps.setString(3, person.getPhone());
             ps.setString(4, person.getEmail());
-            ps.setString(5, person.getCourse());
+            ps.setInt(5, person.getCourse());
             
             ps.execute();
             ps.close();
@@ -45,7 +45,7 @@ public class StudentDAO extends Student{
     }
     
     public List<Student> readStudent(){
-        String sql = "SELECT * FROM Student";
+        String sql = "SELECT * FROM student";
         
         List<Student> students = new ArrayList<Student>();
         
@@ -65,7 +65,7 @@ public class StudentDAO extends Student{
                 student.setAdress(rset.getString("endereco"));
                 student.setPhone(rset.getString("celular"));
                 student.setEmail(rset.getString("email"));
-                student.setCourse(rset.getString("curso"));
+                student.setCourse(rset.getInt("curse_key"));
                 //System.out.println(i++);
                 //In each loop realized this add one student object in array: students;
                 students.add(student);
@@ -91,7 +91,7 @@ public class StudentDAO extends Student{
     }
     
     public void updateStudent(Student person){
-          String sql = "UPDATE Student SET nome = ?, endereco = ?, celular = ?, email = ?, curso =? WHERE ra=? ";
+          String sql = "UPDATE student SET nome = ?, endereco = ?, celular = ?, email = ?, curse_key =? WHERE ra=? ";
         
         PreparedStatement ps = null;
         
@@ -101,7 +101,7 @@ public class StudentDAO extends Student{
             ps.setString(2, person.getAdress());
             ps.setString(3, person.getPhone());
             ps.setString(4, person.getEmail());
-            ps.setString(5, person.getCourse());
+            ps.setInt(5, person.getCourse());
             ps.setInt(6, person.getRa());
             
             ps.execute();
@@ -120,7 +120,7 @@ public class StudentDAO extends Student{
     }
     
     public void deleteStudent(Student person){
-        String sql = "DELETE FROM Student WHERE ra=?";
+        String sql = "DELETE FROM student WHERE ra=?";
         
         PreparedStatement ps = null;
         
@@ -145,7 +145,7 @@ public class StudentDAO extends Student{
     }
 
     public static ResultSet autheticateUser(Student person){
-        String sql = "SELECT * FROM Student WHERE nome=? and email=? ";
+        String sql = "SELECT * FROM student WHERE nome=? and email=? ";
         
         PreparedStatement ps = null;
         
@@ -154,6 +154,7 @@ public class StudentDAO extends Student{
         ps.setString(1, person.getName());
         ps.setString(2, person.getEmail());
         ResultSet rset = ps.executeQuery();
+        
         //return the result of query realized on rset
         return rset;
         

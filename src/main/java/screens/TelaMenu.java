@@ -26,43 +26,34 @@ public class TelaMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        studentRead = new javax.swing.JMenuItem();
-        studentRegister = new javax.swing.JMenuItem();
-        studentUpdate = new javax.swing.JMenuItem();
-        studentDelete = new javax.swing.JMenuItem();
+        barStudent = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
 
-        jMenu1.setText("Student");
-
-        studentRead.setText("Consultar");
-        studentRead.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentReadActionPerformed(evt);
+        barStudent.setText("Aluno");
+        barStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                barStudentMouseClicked(evt);
             }
         });
-        jMenu1.add(studentRead);
+        barStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barStudentActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(barStudent);
 
-        studentRegister.setText("Cadastrar");
-        jMenu1.add(studentRegister);
-
-        studentUpdate.setText("Editar");
-        jMenu1.add(studentUpdate);
-
-        studentDelete.setText("Excluir ");
-        jMenu1.add(studentDelete);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Users");
+        jMenu2.setText("Curses");
 
         jMenuItem4.setText("Consultar");
         jMenu2.add(jMenuItem4);
@@ -94,12 +85,21 @@ public class TelaMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void studentReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentReadActionPerformed
+    private void barStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barStudentActionPerformed
         // TODO add your handling code here:
-        TelaReadAluno tela = new TelaReadAluno();
         dispose();
-        tela.setVisible(true);
-    }//GEN-LAST:event_studentReadActionPerformed
+        StudentScreen screen = new StudentScreen();
+        screen.setVisible(true);
+        screen.setExtendedState(TelaMenu.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_barStudentActionPerformed
+
+    private void barStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barStudentMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        StudentScreen screen = new StudentScreen();
+        screen.setVisible(true);
+        screen.setExtendedState(TelaMenu.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_barStudentMouseClicked
 
     /**
      * @param args the command line arguments
@@ -137,16 +137,13 @@ public class TelaMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu barStudent;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem studentDelete;
-    private javax.swing.JMenuItem studentRead;
-    private javax.swing.JMenuItem studentRegister;
-    private javax.swing.JMenuItem studentUpdate;
     // End of variables declaration//GEN-END:variables
 }
