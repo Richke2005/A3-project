@@ -13,12 +13,12 @@ nome VARCHAR(30) NOT NULL,
 endereco VARCHAR(60),
 celular CHAR(14),
 email VARCHAR(50),
-curse_key INT NOT NULL, 
-FOREIGN KEY (curse_key) REFERENCES curses(curse_id),
+course_key INT NOT NULL, 
+FOREIGN KEY (course_key) REFERENCES courses(course_id),
 PRIMARY KEY(ra)
 );
 
-SELECT * FROM Student;
+SELECT * FROM student;
 
 CREATE TABLE users(
 cpf CHAR(12) NOT NULL, 
@@ -31,12 +31,12 @@ PRIMARY KEY(cpf)
 
 SELECT * FROM users;
 
-CREATE TABLE curses(
-curse_id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE courses(
+course_id INT NOT NULL AUTO_INCREMENT,
 nome VARCHAR(90) NOT NULL, 
 professor VARCHAR(50) NOT NULL,
 descricao VARCHAR (300),
-PRIMARY KEY(curse_id)
+PRIMARY KEY(course_id)
 );
 
-SELECT * FROM curses;
+SELECT * FROM courses;
