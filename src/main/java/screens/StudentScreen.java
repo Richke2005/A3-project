@@ -19,17 +19,11 @@ public class StudentScreen extends javax.swing.JFrame {
     
     DefaultTableModel table;
     private Student aluno = new Student();
-    int ra;
+    public List<Student> listaAlunos = new ArrayList<>();
     
     public StudentScreen() {
         initComponents();
-        this.table = (DefaultTableModel) studentTable.getModel();
-        StudentDAO student = new StudentDAO();
-        List<Student> students = student.readStudent();
-        for(Student element : students){
-            Object[] data = {element.getRa(), element.getName(), element.getAdress(), element.getPhone(), element.getEmail(), element.getCourse()};
-            table.addRow(data);
-        }
+        readTable();
     }
 
     /**
@@ -47,24 +41,12 @@ public class StudentScreen extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        txtRa = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtAdress = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        txtCurse = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         btnAddRow = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Register Student");
+        setTitle("Editar Aluno");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Aluno");
@@ -88,39 +70,43 @@ public class StudentScreen extends javax.swing.JFrame {
             }
         });
         studentTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                studentTableKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 studentTableKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                studentTableKeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(studentTable);
 
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setText("Cadastrar");
-
-        btnUpdate.setText("Atualizar");
-
-        btnDelete.setText("Deletar");
-
-        txtRa.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRaActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Ra");
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdate.setText("Atualizar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Nome");
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDelete.setText("Deletar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("endereço");
-
-        txtPhone.setText("(11)");
-
-        jLabel4.setText("Celular");
-
-        jLabel5.setText("Email");
-
-        jLabel6.setText("curso");
-
-        btnAddRow.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAddRow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAddRow.setText("+");
         btnAddRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,47 +121,18 @@ public class StudentScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAdd)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
+                        .addGap(18, 18, 18)
                         .addComponent(btnUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtRa, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jLabel2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(171, 171, 171)
-                                        .addComponent(jLabel5))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAdress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                    .addComponent(txtCurse)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel6))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,81 +140,85 @@ public class StudentScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCurse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnUpdate)
+                    .addComponent(btnAddRow)
                     .addComponent(btnDelete)
-                    .addComponent(btnAddRow))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(btnUpdate)
+                    .addComponent(btnAdd))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRaActionPerformed
-
     private void studentTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_studentTableComponentShown
         // TODO add your handling code here:
-        
-       
     }//GEN-LAST:event_studentTableComponentShown
 
     private void studentTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_studentTableKeyReleased
         // TODO add your handling code here:
         if(studentTable.getSelectedRow() != -1){
+            Student alunoListado = new Student();
             int rowLength = studentTable.getColumnCount();
             
             for(int i = 0; i < rowLength; i++){
             Object data = studentTable.getValueAt(studentTable.getSelectedRow(), i);
             switch(i){
                 case 0:
-                    aluno.setRa(data.toString());
+                    if(!data.equals("")){
+                      aluno.setRa(data.toString());
+                      alunoListado.setRa(data.toString());
+                    }else{
+                        aluno.setRa(null);
+                        alunoListado.setRa(null);
+                    }
                     break;
+                    
                 case 1:
-                    aluno.setName(data.toString());
+                    if(!data.equals("")){
+                        aluno.setName(data.toString());
+                        alunoListado.setName(data.toString());
+                    }else{
+                        showMessageDialog(null, "Insira o nome para continuar");
+                    }
                     break;
+                    
                 case 2: 
                     aluno.setAdress(data.toString());
+                    alunoListado.setAdress(data.toString());
                     break;
+                    
                 case 3: 
-                    aluno.setPhone(data.toString());
+                    if(!data.equals("")){
+                        aluno.setPhone(data.toString());
+                        alunoListado.setPhone(data.toString());
+                    }else{
+                        showMessageDialog(null, "Insira um telefone de contato para continuar");
+                    }
                     break;
+                    
                 case 4: 
                     aluno.setEmail(data.toString());
+                    alunoListado.setEmail(data.toString());
                     break;
+                    
                 case 5:
-                    aluno.setCourse(data.hashCode());
+                    if(!data.equals("")){
+                       aluno.setCourse(Integer.parseInt(data.toString())); 
+                       alunoListado.setCourse(Integer.parseInt(data.toString())); 
+                    }else{
+                        showMessageDialog(null, "Você deve digitar o curso referente ao aluno");
+                    }
                 break;
                 
                 default:
                     showMessageDialog(null,"Error dado de aluno esperado" );
+                    break;
                 }
             }
-           aluno.describeStudent();
+            listaAlunos.add(alunoListado);
         }
     }//GEN-LAST:event_studentTableKeyReleased
 
@@ -279,6 +240,95 @@ public class StudentScreen extends javax.swing.JFrame {
         this.table.fireTableDataChanged();
     }//GEN-LAST:event_btnAddRowActionPerformed
 
+    private void studentTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_studentTableKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_studentTableKeyPressed
+
+    private void studentTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_studentTableKeyTyped
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_studentTableKeyTyped
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        //for(Student element : listaAlunos){
+         if(verifyVoidRows()){
+          new StudentDAO().updateStudent(aluno);
+           readTable(); 
+         }else{
+           readTable(); 
+         }
+         
+        //}
+       
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if(verifyVoidRows()){
+        new StudentDAO().addStudent(aluno);
+        readTable();
+        }else{
+        readTable();
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        new StudentDAO().deleteStudent(aluno);
+        readTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+    
+    public boolean verifyVoidRows(){
+        boolean teste = true;
+        int rowLength = studentTable.getColumnCount();
+            
+            for(int i = 0; i < rowLength; i++){
+            Object collum = studentTable.getValueAt(studentTable.getSelectedRow(), i);
+            switch(i){
+                case 1:
+                    if(collum.equals("")){
+                       showMessageDialog(null, "Insira o nome para continuar");
+                       teste = false;
+                    }
+                    break;
+                    
+                case 3: 
+                    if(collum.equals("")){
+                       showMessageDialog(null, "Insira um telefone de contato para continuar");
+                       teste = false;
+                    }
+                    break;
+                    
+                case 5:
+                    if(collum.equals("")){
+                        showMessageDialog(null, "Você deve digitar o curso referente ao aluno");
+                        teste = false;
+                    }
+                break;
+                }
+            }
+            return teste;
+            
+    }
+    
+    public void readTable(){
+        this.table = (DefaultTableModel) studentTable.getModel();
+        table.setNumRows(0);
+        StudentDAO student = new StudentDAO();
+        List<Student> students = student.readStudent();
+        for(Student element : students){
+            table.addRow( new Object[]{
+                element.getRa(),
+                element.getName(),
+                element.getAdress(),
+                element.getPhone(),
+                element.getEmail(),
+                element.getCourse()
+            });
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -320,20 +370,8 @@ public class StudentScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnAddRow;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable studentTable;
-    private javax.swing.JTextField txtAdress;
-    private javax.swing.JTextField txtCurse;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtRa;
     // End of variables declaration//GEN-END:variables
 }

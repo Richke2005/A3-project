@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -38,8 +39,9 @@ public class StudentDAO extends Student{
             
             ps.execute();
             ps.close();
-            
+            showMessageDialog(null, "Cadastrado com sucesso");
         } catch (SQLException ex) {
+            showMessageDialog(null, "Erro ao cadastrar no banco");
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -47,7 +49,7 @@ public class StudentDAO extends Student{
     public List<Student> readStudent(){
         String sql = "SELECT * FROM student";
         
-        List<Student> students = new ArrayList<Student>();
+        List<Student> students = new ArrayList<>();
         
          PreparedStatement ps = null;
          //Class who recover data bases
@@ -107,11 +109,13 @@ public class StudentDAO extends Student{
             ps.execute();
             
         } catch (SQLException ex) {
+            showMessageDialog(null, "Erro ao atualizar no banco");
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try{
                 if(ps!=null){
                    ps.close();
+                   showMessageDialog(null, "atualizado com sucesso");
                 }
             }catch(SQLException ex){
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,11 +134,13 @@ public class StudentDAO extends Student{
             
             ps.execute();
         }catch(SQLException ex){
+            showMessageDialog(null, "Erro ao deletar do banco");
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try{
                 if(ps!=null){
                     ps.close();
+                    showMessageDialog(null, "Deletado com sucesso");
                 }
             }catch(SQLException ex){
                  Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);        

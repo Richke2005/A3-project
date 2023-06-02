@@ -9,7 +9,7 @@ package classes;
  * @author richard
  */
 public class Student {
-    private String ra;
+    private String ra = null;
     private String name;
     private String adress; 
     private String phoneNumber;
