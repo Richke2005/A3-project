@@ -6,24 +6,27 @@ package screens;
 
 import classes.Student;
 import classes.StudentDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
  * @author richard
  */
 public class StudentScreen extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TelaCadastroAluno
-     */
+    
+    DefaultTableModel table;
+    private Student aluno = new Student();
+    int ra;
+    
     public StudentScreen() {
         initComponents();
-        DefaultTableModel table = (DefaultTableModel) studentTable.getModel();
-        StudentDAO aluno = new StudentDAO();
-        List<Student> alunos = aluno.readStudent();
-        for(Student element : alunos){
+        this.table = (DefaultTableModel) studentTable.getModel();
+        StudentDAO student = new StudentDAO();
+        List<Student> students = student.readStudent();
+        for(Student element : students){
             Object[] data = {element.getRa(), element.getName(), element.getAdress(), element.getPhone(), element.getEmail(), element.getCourse()};
             table.addRow(data);
         }
@@ -56,6 +59,7 @@ public class StudentScreen extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtCurse = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        btnAddRow = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Register Student");
@@ -67,15 +71,25 @@ public class StudentScreen extends javax.swing.JFrame {
 
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "RA", "NOME", "ENDEREÇO", "CELULAR", "EMAIL", "CURSO"
             }
         ));
+        studentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                studentTableMouseClicked(evt);
+            }
+        });
         studentTable.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 studentTableComponentShown(evt);
+            }
+        });
+        studentTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                studentTableKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(studentTable);
@@ -106,6 +120,14 @@ public class StudentScreen extends javax.swing.JFrame {
 
         jLabel6.setText("curso");
 
+        btnAddRow.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAddRow.setText("+");
+        btnAddRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddRowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +137,9 @@ public class StudentScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdd)
-                        .addGap(197, 197, 197)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(113, 113, 113)
                         .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete))
@@ -178,11 +202,12 @@ public class StudentScreen extends javax.swing.JFrame {
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCurse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
+                    .addComponent(btnDelete)
+                    .addComponent(btnAddRow))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -200,6 +225,59 @@ public class StudentScreen extends javax.swing.JFrame {
         
        
     }//GEN-LAST:event_studentTableComponentShown
+
+    private void studentTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_studentTableKeyReleased
+        // TODO add your handling code here:
+        if(studentTable.getSelectedRow() != -1){
+            int rowLength = studentTable.getColumnCount();
+            
+            for(int i = 0; i < rowLength; i++){
+            Object data = studentTable.getValueAt(studentTable.getSelectedRow(), i);
+            switch(i){
+                case 0:
+                    aluno.setRa(data.toString());
+                    break;
+                case 1:
+                    aluno.setName(data.toString());
+                    break;
+                case 2: 
+                    aluno.setAdress(data.toString());
+                    break;
+                case 3: 
+                    aluno.setPhone(data.toString());
+                    break;
+                case 4: 
+                    aluno.setEmail(data.toString());
+                    break;
+                case 5:
+                    aluno.setCourse(data.hashCode());
+                break;
+                
+                default:
+                    showMessageDialog(null,"Error dado de aluno esperado" );
+                }
+            }
+           aluno.describeStudent();
+        }
+    }//GEN-LAST:event_studentTableKeyReleased
+
+    private void studentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentTableMouseClicked
+        // TODO add your handling code here:
+        if(studentTable.getSelectedRow() != -1){
+            Object selectedRa = studentTable.getValueAt(studentTable.getSelectedRow(), 0);
+            if(selectedRa == null){
+                selectedRa = "";
+            }
+            aluno.setRa(selectedRa.toString());
+        }
+    }//GEN-LAST:event_studentTableMouseClicked
+
+    private void btnAddRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRowActionPerformed
+        // TODO add your handling code here:
+        Object[] voidData = {"", "", "", "", "", ""};
+        this.table.addRow(voidData);
+        this.table.fireTableDataChanged();
+    }//GEN-LAST:event_btnAddRowActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +317,7 @@ public class StudentScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddRow;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;

@@ -60,7 +60,7 @@ public class StudentDAO extends Student{
             //int i =1;
             while(rset.next()){
                 Student student = new Student();
-                student.setRa(rset.getInt("ra"));
+                student.setRa(rset.getString("ra"));
                 student.setName(rset.getString("nome"));
                 student.setAdress(rset.getString("endereco"));
                 student.setPhone(rset.getString("celular"));
@@ -102,7 +102,7 @@ public class StudentDAO extends Student{
             ps.setString(3, person.getPhone());
             ps.setString(4, person.getEmail());
             ps.setInt(5, person.getCourse());
-            ps.setInt(6, person.getRa());
+            ps.setString(6, person.getRa());
             
             ps.execute();
             
@@ -126,7 +126,7 @@ public class StudentDAO extends Student{
         
         try{
             ps = Conexao.getConexao().prepareStatement(sql);
-            ps.setInt(1, person.getRa());
+            ps.setString(1, person.getRa());
             
             ps.execute();
         }catch(SQLException ex){
@@ -157,7 +157,6 @@ public class StudentDAO extends Student{
         
         //return the result of query realized on rset
         return rset;
-        
         
         }catch(SQLException ex){
             System.out.println("authenticate User:");

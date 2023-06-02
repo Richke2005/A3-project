@@ -9,7 +9,7 @@ package classes;
  * @author richard
  */
 public class Student {
-    private int ra;
+    private String ra;
     private String name;
     private String adress; 
     private String phoneNumber;
@@ -31,11 +31,11 @@ public class Student {
 
     
     //Getters and Setters -------------------------------------------
-    public int getRa(){
+    public String getRa(){
         return ra;
     }
     
-    public void setRa(int ra){
+    public void setRa(String ra){
         this.ra = ra;
     }
     
@@ -82,6 +82,7 @@ public class Student {
    
    //Describe Student
    public void describeStudent() {
+         System.out.println(getRa());
          System.out.println(getName());
          System.out.println(getAdress());
          System.out.println(getPhone());
