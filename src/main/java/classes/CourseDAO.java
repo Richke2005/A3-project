@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package classes;
+
 import connection.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,26 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.JOptionPane.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
  * @author richard
  */
-public class StudentDAO extends Student{
+public class CourseDAO extends Courses{
     
-    public void addStudent(Student person){
-        String sql = "INSERT INTO student (nome, endereco, celular, email, course_key) VALUES(?,?,?,?,?)";
+     public void addCourse(Courses course){
+        String sql = "INSERT INTO courses (course_id, nome, professor, descricao) VALUES(?,?,?,?)";
         
         PreparedStatement ps = null;
         
         try {
             ps = Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, person.getName());
-            ps.setString(2, person.getAdress());
-            ps.setString(3, person.getPhone());
-            ps.setString(4, person.getEmail());
-            ps.setInt(5, person.getCourse());
+            ps.setString(1, course.getCourseID());
+            ps.setString(2, course.getNameCourse());
+            ps.setString(3, course.getTeacher());
+            ps.setString(4, course.getDescription());
             
             ps.execute();
             ps.close();
@@ -39,12 +39,13 @@ public class StudentDAO extends Student{
             showMessageDialog(null, "Erro ao cadastrar no banco");
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public List<Student> readStudent(){
-        String sql = "SELECT * FROM student";
         
-        List<Student> students = new ArrayList<>();
+    }
+     
+     public List<Courses> readCourses(){
+        String sql = "SELECT * FROM courses";
+        
+        List<Courses> courseList = new ArrayList<>();
         
          PreparedStatement ps = null;
          //Class who recover data bases
@@ -54,23 +55,22 @@ public class StudentDAO extends Student{
             ps = Conexao.getConexao().prepareStatement(sql);
             rset = ps.executeQuery();
             
-            //int i =1;
+           
             while(rset.next()){
-                Student student = new Student();
-                student.setRa(rset.getString("ra"));
-                student.setName(rset.getString("nome"));
-                student.setAdress(rset.getString("endereco"));
-                student.setPhone(rset.getString("celular"));
-                student.setEmail(rset.getString("email"));
-                student.setCourse(rset.getInt("course_key"));
-                
+                Courses course = new Courses();
+                course.setCourseID(rset.getString("course_id"));
+                course.setCourseName(rset.getString("nome"));
+                course.setTeacher(rset.getString("professor"));
+                course.setDescription(rset.getString("descricao"));
+                //System.out.println(i++);
                 //In each loop realized this add one student object in array: students;
-                students.add(student);
+                courseList.add(course);
             }
             
             
         } catch (SQLException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            showMessageDialog(null, "Erro ao requisitar informações do banco");
         }
         finally{
             try{
@@ -84,22 +84,20 @@ public class StudentDAO extends Student{
                     Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }      
             }
-        return students;
+        return courseList;
     }
-    
-    public void updateStudent(Student person){
-          String sql = "UPDATE student SET nome = ?, endereco = ?, celular = ?, email = ?, course_key =? WHERE ra=? ";
+     
+       public void updateCourse(Courses course){
+          String sql = "UPDATE courses SET nome = ?, professor= ?, descricao=? WHERE course_id=? ";
         
         PreparedStatement ps = null;
         
         try {
             ps = Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, person.getName());
-            ps.setString(2, person.getAdress());
-            ps.setString(3, person.getPhone());
-            ps.setString(4, person.getEmail());
-            ps.setInt(5, person.getCourse());
-            ps.setString(6, person.getRa());
+            ps.setString(1, course.getNameCourse());
+            ps.setString(2, course.getTeacher());
+            ps.setString(3, course.getDescription());
+            ps.setString(4, course.getCourseID());
             
             ps.execute();
             showMessageDialog(null, "atualizado com sucesso");
@@ -110,21 +108,22 @@ public class StudentDAO extends Student{
             try{
                 if(ps!=null){
                    ps.close();
+                  
                 }
             }catch(SQLException ex){
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
-    public void deleteStudent(Student person){
-        String sql = "DELETE FROM student WHERE ra=?";
+       
+     public void deleteCourse(Courses course){
+        String sql = "DELETE FROM courses WHERE course_id=?";
         
         PreparedStatement ps = null;
         
         try{
             ps = Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, person.getRa());
+            ps.setString(1, course.getCourseID());
             
             ps.execute();
             showMessageDialog(null, "Deletado com sucesso");
@@ -140,6 +139,8 @@ public class StudentDAO extends Student{
                  Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);        
             }
         }
+        
+        
     }
-
+   
 }

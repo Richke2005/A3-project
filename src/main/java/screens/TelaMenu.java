@@ -27,18 +27,19 @@ public class TelaMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         barStudent = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        barCourses = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Bem vindo ao nosso Sistema");
 
         barStudent.setText("Aluno");
         barStudent.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -53,21 +54,13 @@ public class TelaMenu extends javax.swing.JFrame {
         });
         jMenuBar1.add(barStudent);
 
-        jMenu2.setText("Curses");
-
-        jMenuItem4.setText("Consultar");
-        jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Cadastrar");
-        jMenu2.add(jMenuItem5);
-
-        jMenuItem6.setText("Editar");
-        jMenu2.add(jMenuItem6);
-
-        jMenuItem7.setText("Excluir");
-        jMenu2.add(jMenuItem7);
-
-        jMenuBar1.add(jMenu2);
+        barCourses.setText("Cursos");
+        barCourses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                barCoursesMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(barCourses);
 
         setJMenuBar(jMenuBar1);
 
@@ -75,11 +68,17 @@ public class TelaMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addGap(93, 93, 93))
         );
 
         pack();
@@ -90,7 +89,7 @@ public class TelaMenu extends javax.swing.JFrame {
         dispose();
         StudentScreen screen = new StudentScreen();
         screen.setVisible(true);
-        screen.setExtendedState(TelaMenu.MAXIMIZED_BOTH);
+        screen.setExtendedState(StudentScreen.MAXIMIZED_BOTH);
     }//GEN-LAST:event_barStudentActionPerformed
 
     private void barStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barStudentMouseClicked
@@ -98,8 +97,16 @@ public class TelaMenu extends javax.swing.JFrame {
         dispose();
         StudentScreen screen = new StudentScreen();
         screen.setVisible(true);
-        screen.setExtendedState(TelaMenu.MAXIMIZED_BOTH);
+        screen.setExtendedState(StudentScreen.MAXIMIZED_BOTH);
     }//GEN-LAST:event_barStudentMouseClicked
+
+    private void barCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barCoursesMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        CourseScreen screen = new CourseScreen();
+        screen.setVisible(true);
+        screen.setExtendedState(CourseScreen.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_barCoursesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -137,13 +144,10 @@ public class TelaMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu barCourses;
     private javax.swing.JMenu barStudent;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }

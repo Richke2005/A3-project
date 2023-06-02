@@ -42,12 +42,13 @@ public class StudentScreen extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnAddRow = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        barHome = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar Aluno");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Aluno");
 
@@ -107,12 +108,27 @@ public class StudentScreen extends javax.swing.JFrame {
         });
 
         btnAddRow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAddRow.setText("+");
+        btnAddRow.setText("Adicionar Aluno");
         btnAddRow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddRowActionPerformed(evt);
             }
         });
+
+        barHome.setText("Home");
+        barHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                barHomeMouseClicked(evt);
+            }
+        });
+        barHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barHomeActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(barHome);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,14 +140,13 @@ public class StudentScreen extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdate)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAddRow, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDelete)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -141,13 +156,14 @@ public class StudentScreen extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddRow)
-                    .addComponent(btnDelete)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnAdd))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDelete)
+                        .addComponent(btnUpdate)
+                        .addComponent(btnAdd))
+                    .addComponent(btnAddRow))
+                .addContainerGap())
         );
 
         pack();
@@ -226,9 +242,6 @@ public class StudentScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(studentTable.getSelectedRow() != -1){
             Object selectedRa = studentTable.getValueAt(studentTable.getSelectedRow(), 0);
-            if(selectedRa == null){
-                selectedRa = "";
-            }
             aluno.setRa(selectedRa.toString());
         }
     }//GEN-LAST:event_studentTableMouseClicked
@@ -279,6 +292,19 @@ public class StudentScreen extends javax.swing.JFrame {
         new StudentDAO().deleteStudent(aluno);
         readTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void barHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barHomeActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_barHomeActionPerformed
+
+    private void barHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barHomeMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        TelaMenu menu = new TelaMenu();
+        menu.setVisible(true);
+        menu.setExtendedState(TelaMenu.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_barHomeMouseClicked
     
     public boolean verifyVoidRows(){
         boolean teste = true;
@@ -366,11 +392,13 @@ public class StudentScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu barHome;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAddRow;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable studentTable;
     // End of variables declaration//GEN-END:variables
