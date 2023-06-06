@@ -56,6 +56,14 @@ public class User {
         this.phoneNumber = num;
     }
     
+    public void describeUser(){
+        System.out.println(getCpf());
+        System.out.println(getName());
+        System.out.println(getEmail());
+        System.out.println(getPassword());
+        System.out.println(getNumber());
+    }
+    
 // ------------------------------------------------------
     
     

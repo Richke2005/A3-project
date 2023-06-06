@@ -41,8 +41,10 @@ public class UserDAO extends User{
             
             ps.execute();
             ps.close();
+            showMessageDialog(null, "Usuario cadastrado com sucesso");
             
         } catch (SQLException ex) {
+            showMessageDialog(null, "Falha ao cadastrar usuário");
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
