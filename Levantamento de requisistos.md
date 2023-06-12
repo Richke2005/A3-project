@@ -43,18 +43,36 @@ A Student Registration System integrated with a Database will be implemented, ca
 
 ### Requisitos Não Funcionais
 
-[RNF1] - O sistema deverá ter um tempo de resposta de no máximo 5 segundos
+a) Usabilidade: 
+- O sistema deve ser intuitivo e de fácil utilização, mesmo para usuários sem conhecimentos técnicos avançados. 
+- Deve possuir uma interface amigável, com navegação clara e organizada. 
+- Deve ser responsivo, adaptando-se a diferentes dispositivos, como computadores, tablets e smartphones. 
 
-[RNF2] - O sistema deverá der desenvolvido em JAVA como uma aplicação
+b) Segurança: 
+- O sistema deve garantir a segurança das informações pessoais dos alunos, adotando medidas de proteção, como criptografia e controle de acesso. 
+- Deve ser possível definir diferentes níveis de permissão de acesso aos dados, de acordo com as funções, responsabilidades e idades de cada usuário. 
 
-[RNF3] - O sistema deverá ter um meio de login seguro para usuários
+c)  Desempenho: 
+- O sistema deve ser capaz de lidar com um grande volume de dados, garantindo a sua performance mesmo em momentos de pico de utilização. 
+- Deve ter tempos de resposta rápidos, evitando atrasos e lentidão na utilização. 
 
-[RNF4] - O sistema deverá ser de fácil aprendizado
+d)  Integração 
+- O sistema deve permitir integração com outros sistemas existentes na instituição, como sistemas de gestão acadêmica, plataformas de aprendizagem online e sistemas de controle de acesso. 
 
-[RNF5] - O sistema deverá ter integridade de dados
+ 
 
-[RNF6] - O sistema deve ser intuitivo e de fácil utilização, mesmo para usuários sem conhecimentos técnicos avançados. 
+[RNF1] - O sistema deve ser intuitivo e de fácil utilização, mesmo para usuários sem conhecimentos técnicos avançados. 
 
-[RNF7] - Deve possuir uma interface amigável, com navegação clara e organizada. 
+[RNF2] - Deve possuir uma interface amigável, com navegação clara e organizada. 
 
-[RNF8] - Deve ser responsivo, adaptando-se a diferentes dispositivos, como computadores, tablets e smartphones. 
+[RNF3] - Deve ser responsivo, adaptando-se a diferentes dispositivos, como computadores, tablets e smartphones. 
+
+[RNF4] - O sistema deve garantir a segurança das informações pessoais dos alunos, adotando medidas de proteção, como criptografia e controle de acesso. 
+
+[RNF5] - Deve ser possível definir diferentes níveis de permissão de acesso aos dados, de acordo com as funções, responsabilidades e idades de cada usuário.
+
+[RNF6] - O sistema deve ser capaz de lidar com um grande volume de dados, garantindo a sua performance mesmo em momentos de pico de utilização.  
+
+[RNF7] - Deve ter tempos de resposta rápidos, evitando atrasos e lentidão na utilização.
+
+[RNF8] - O sistema deve permitir integração com outros sistemas existentes na instituição, como sistemas de gestão acadêmica, plataformas de aprendizagem online e sistemas de controle de acesso.
