@@ -52,3 +52,9 @@ A Student Registration System integrated with a Database will be implemented, ca
 [RNF4] - O sistema deverá ser de fácil aprendizado
 
 [RNF5] - O sistema deverá ter integridade de dados
+
+[RNF6] - O sistema deve ser intuitivo e de fácil utilização, mesmo para usuários sem conhecimentos técnicos avançados. 
+
+[RNF7] - Deve possuir uma interface amigável, com navegação clara e organizada. 
+
+[RNF8] - Deve ser responsivo, adaptando-se a diferentes dispositivos, como computadores, tablets e smartphones. 
