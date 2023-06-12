@@ -1,4 +1,5 @@
-Escopo do Sistema: 
+# Escopo do Sistema:
+
 O sistema de gerenciamento de alunos terá as seguintes funcionalidades: 
 a) Cadastro de alunos: permitirá o registro de informações pessoais, acadêmicas e de contato dos alunos, facilitando a manutenção de um banco de dados atualizado. 
 
