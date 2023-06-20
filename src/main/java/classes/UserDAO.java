@@ -134,6 +134,7 @@ public class UserDAO extends User{
             ps.setString(1, person.getCpf());
             
             ps.execute();
+            showMessageDialog(null, "Usuario Deletado com sucesso");
         }catch(SQLException ex){
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{

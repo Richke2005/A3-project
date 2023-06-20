@@ -74,6 +74,11 @@ public class AddUserScreen extends javax.swing.JFrame {
         });
 
         btnDel.setText("Deletar");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         barReturn.setText("Voltar");
         barReturn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -185,6 +190,15 @@ public class AddUserScreen extends javax.swing.JFrame {
         InicialScreen tela = new InicialScreen();
         tela.setVisible(true);
     }//GEN-LAST:event_barReturnMouseClicked
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+         String cpf = txtCpf.getText();
+         User usuario = new User();
+         usuario.setCpf(cpf);
+  
+         new UserDAO().deleteUser(usuario);
+    }//GEN-LAST:event_btnDelActionPerformed
 
     public boolean verifyVoidRows(){
         boolean isVoid = true;
