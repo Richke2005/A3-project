@@ -15,23 +15,16 @@ import java.sql.SQLException;
  * @author richard
  */
 public class Conexao {
-    
-   private static final String url = "jdbc:mysql://localhost:3306/faculdade";
-   private static final String user = "root";
-   private static final String password = "root";
-   
-   private static Connection conn;
+
+   private static final String url = "50.17.168.173:3306/";
+   private static final String user = "admin";
+   private static final String password = "ZpVCzKU6bY79xS4V9ZFb";
    
     public static Connection getConexao() {
-        
         try {
-            if(conn == null){
-               conn = DriverManager.getConnection(url, user, password);
-               System.out.println("conexao ok");
-               return conn;
-            }else{
-               return conn;
-            }
+            final Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Conexao ok");
+            return conn;
         }
         catch (SQLException ex) {
            System.out.println("Driver do banco de dados não localizado");
@@ -39,5 +32,4 @@ public class Conexao {
             return null;
         }
     }
-    
 }
