@@ -4,11 +4,13 @@
  */
 package screens;
 
-import classes.Student;
-import classes.StudentDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+
+import model.Student;
+import model.StudentDAO;
+
 import static javax.swing.JOptionPane.*;
 
 /**

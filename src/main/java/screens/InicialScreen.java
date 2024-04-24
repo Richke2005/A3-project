@@ -6,12 +6,14 @@ package screens;
 
 
 
-import classes.User;
-import classes.UserDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.User;
+import model.UserDAO;
+
 import static javax.swing.JOptionPane.*;
 
 

@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package screens;
-import classes.CourseDAO;
-import classes.Courses;
 import java.util.List;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
+
+import model.CourseDAO;
+import model.Courses;
 
 /**
  *

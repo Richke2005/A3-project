@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package screens;
-import classes.User;
-import classes.UserDAO;
 import static javax.swing.JOptionPane.*;
+
+import model.User;
+import model.UserDAO;
 
 /**
  *
