@@ -35,30 +35,28 @@ public class Model extends Conexao{
     }
 
     public ResultSet selectAll(){
-        String sql = "SELECT * FROM " + this.modelName;
+        String sql = "SELECT * FROM " + modelName +";";
         PreparedStatement ps = null;
         ResultSet result = null;
         try{
             ps = getConexao().prepareStatement(sql);
-            if(result == null){
+            
             result = ps.executeQuery();
-            }
-
-            return result;
+            if(result != null){
+                return result;
+            }else{
+                return null;
+            }   
         }catch(SQLException e){
             System.out.println(e.getMessage());
             return null;
         }finally{
-            try{
-                ps.close();
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
+     
         }  
     }
 
     public ResultSet selectById(String camp, int id){
-        String sql = "SELECT * FROM " + (this.modelName + " WHERE " + camp + " = " + id);
+        String sql = "SELECT * FROM " + modelName + " WHERE " + camp + " = " + id;
         PreparedStatement ps = null;
         ResultSet result = null;
         try{
@@ -80,8 +78,8 @@ public class Model extends Conexao{
         }  
     }
 
-    public ResultSet selectById(String id){
-        String sql = "SELECT * FROM " + (this.modelName + " WHERE id = " + id);
+    public ResultSet selectById(int id){
+        String sql = "SELECT * FROM " + modelName + " WHERE id = " + id;
         PreparedStatement ps = null;
         ResultSet result = null;
         try{
@@ -103,6 +101,6 @@ public class Model extends Conexao{
         }  
     }
     public static void main(String[] args) {
-        System.out.println(new Model("courses").selectById("course_id", 1));
+        System.out.println(new Model("student").selectAll());
     }
 }
