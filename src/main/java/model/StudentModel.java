@@ -81,21 +81,22 @@ public class StudentModel extends Model{
     }
     
    
-    public List<StudentModel> selectAlls() {
+    public StudentModel[] selectAlls() {
         // TODO Auto-generated method stub
         ResultSet resultSet = null;
         try{
             resultSet = super.selectAll();
+            int i = 0;
+            StudentModel students[] = null;
             while(resultSet.next()){
-                StudentModel student = new StudentModel(
+                students[i] = new StudentModel(
                     resultSet.getString("ra"),
-                    resultSet.getString("nome"),
+                    resultSet.getString("nome"), 
                     resultSet.getString("endereco"),
-                    resultSet.getString("celular"),
-                    resultSet.getString("email"), 
-                    resultSet.getInt("course_key"));
-                students.add(student);
-           
+                    resultSet.getString("celular"), 
+                    resultSet.getString("email"),
+                    resultSet.getInt("course_key")
+                );
             }
             return students;
         }catch(Exception e){

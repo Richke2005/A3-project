@@ -20,7 +20,7 @@ public class Conexao {
    private static final String user = "root";
    private static final String password = "";
    
-    public static Connection getConexao() {
+    protected static Connection getConexao() {
         try {
             final Connection conn = DriverManager.getConnection(url, user, password);
             System.out.println("Conexao ok");
